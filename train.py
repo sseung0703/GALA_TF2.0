@@ -10,8 +10,7 @@ import op_util
 from nets import GALA
 
 home_path = os.path.dirname(os.path.abspath(__file__))
-parser = argparse.ArgumentParser(description='Variational_Information_Distillation Implementation via TF2.0 low-level coding')
-
+parser = argparse.ArgumentParser()
 parser.add_argument("--train_dir", default="test", type=str)
 parser.add_argument("--dataset", default="mnist", type=str)
 args = parser.parse_args()
@@ -53,11 +52,9 @@ if __name__ == '__main__':
     do_log  = 100
     do_test = 1000
     
-#    gpu_num = 0
     tf.debugging.set_log_device_placement(False)
     gpus = tf.config.experimental.list_physical_devices('GPU')
     tf.config.experimental.set_memory_growth(gpus[0], True)
-#    tf.config.experimental.set_visible_devices(gpus[gpu_num], 'GPU')
    
     _,_, test_images, test_labels = Dataloader(args.dataset, '')
     test_images = test_images.reshape(test_images.shape[0],-1).astype(np.float32)
